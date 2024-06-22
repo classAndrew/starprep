@@ -2,6 +2,7 @@ import { useState } from "react";
 import Genre from "./Genre.jsx";
 import Role from "./Role.jsx";
 import Gender from "./Gender.jsx";
+import RecordPage from "./RecordPage.jsx";
 
 function Form() {
   const [step, setStep] = useState(1);
@@ -23,6 +24,8 @@ function Form() {
         return <Gender updateForm={updateForm} />;
       case 3:
         return <Role updateForm={updateForm} />;
+      case 4:
+        return <RecordPage />;
 
       default:
         return <Genre updateForm={updateForm} />;
@@ -35,9 +38,9 @@ function Form() {
    * @returns
    */
   function handleFormNavigate(num) {
-    if (step + num > Object.keys(form).length || step + num <= 0) {
-      return;
-    }
+    // if (step + num > Object.keys(form).length || step + num <= 0) {
+    //   return;
+    // }
     setStep((step) => step + num);
   }
 
