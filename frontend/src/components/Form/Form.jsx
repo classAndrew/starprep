@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Genre from "./Genre.jsx";
 import Role from "./Role.jsx";
 import Gender from "./Gender.jsx";
+import Confirm from "./Confirm.jsx";
 
 function Form() {
   const [step, setStep] = useState(1);
@@ -10,6 +11,26 @@ function Form() {
     gender: "",
     role: "",
   });
+
+  async function handleOnSubmit(e) {
+    e.preventDefault();
+    try {
+      const request = await fetch("http://localhost:8080/api/updateFeatures", {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+
+      const json = await request.json();
+
+      if (request.status === 200) {
+        console.log("Success");
+      } else {
+        console.log("Failed");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   /**
    *
@@ -25,7 +46,7 @@ function Form() {
         return <Role updateForm={updateForm} />;
 
       default:
-        return <Genre updateForm={updateForm} />;
+        return <Confirm {...form} />;
     }
   };
 
@@ -35,7 +56,7 @@ function Form() {
    * @returns
    */
   function handleFormNavigate(num) {
-    if (step + num > Object.keys(form).length || step + num <= 0) {
+    if (step + num > 4 || step + num <= 0) {
       return;
     }
     setStep((step) => step + num);
@@ -64,6 +85,7 @@ function Form() {
     }
     return true;
   }
+
   console.log(form);
 
   return (
@@ -77,14 +99,21 @@ function Form() {
       >
         Prev
       </button>
-      <button
-        type="button"
-        onClick={() => {
-          handleFormNavigate(1);
-        }}
-      >
-        Next
-      </button>
+
+      {step === 4 ? (
+        <button type="button" onClick={handleOnSubmit}>
+          Submit
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={() => {
+            handleFormNavigate(1);
+          }}
+        >
+          Next
+        </button>
+      )}
     </form>
   );
 }
