@@ -16,50 +16,29 @@ app = Flask(__name__)
 hume_batch_client = HumeBatchClient(hume_key)
 hume_stream_client = HumeStreamClient(hume_key)
 
-user_story_sequence = ["start"]
 
-@app.route('/gen_next_story_button', methods=['GET'])
-def gen_next_story_button():
-    global user_story_sequence
-    next_button = request.args.get("next_button")
-    if next_button:
-        user_story_sequence.append(next_button)
-
+@app.route('/api/updateFeatures', methods=['POST'])
+def updateFeatures():
+    params = request.get_json(force=True)
+    print('received', params)
     response = gpt_client.chat.completions.create(
         model="gpt-4o", 
         messages=[{"role": "system", "content": f"""
-You will be generating labels for buttons for users to create a story out of.
-Given a sequence of labels, please generate 5 more labels as options that can add to the theme of the story. 
-If you just see the label sequence ["start"], then start off with generating 5 unique options that can help begin the story.
-These options should be "theme-like" and not whole sentences.
-Please respond in the following format: ["Label1", "Label2", "Label3", "Label4", "Label5"]
-Here is the user's input: {user_story_sequence}        
+Please write a piece of dialogue for a single character that matches the given description voice actors to read aloud. 
+Include only the text that will be read aloud.
+Center the story given the following characteristics:
+Genre: {params['genre']}   
+Gender: {params['gender']}   
+Role: {params['role']}   
 """}],
-        max_tokens=100 
-    )
-
-    openai_choices = response.choices[0].message.content
-    choices_as_list = eval(openai_choices)
-
-    return jsonify({"buttons": choices_as_list})
-
-def gen_story_from_buttons():
-    global user_story_sequence
-    # ignore the start sequence
-    user_story_sequence = user_story_sequence[1:]
-    response = gpt_client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "system", "content": f"""
-Given a sequence in the format ["Label1", "Label2", "Label3", "Label4", "Label5"], please generate a single dialogue for a specific character
-that fits the sequece. Generate three sentences and only include what is said without narration. Place each sentence on a new line
-Here is the user's input: {user_story_sequence}        
-    """}],
         max_tokens=700
     )
 
-    openai_script = response.choices[0].message.content
-    return openai_script
-    # return jsonify({"script": openai_script})
+    openai_response = response.choices[0].message.content
+    response = jsonify({"script": openai_response})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
 
 async def hume_get_story_emotions(samples):
     config = LanguageConfig()
@@ -88,10 +67,4 @@ def hello_world():
     return 'Hello, World!'
 
 if __name__ == '__main__':
-    user_story_sequence = ["random", "angry", "technology"]
-    story = gen_story_from_buttons()
-    print("generated story:", story)
-    hume_emotions = get_emotions_from_story(story)
-    for x in hume_emotions:
-        print('\n'+'\n'.join(str(y) for y in x))
-    # app.run(debug=True)
+    app.run(port=8080)

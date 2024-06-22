@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Genre from "./Genre.jsx";
 import Role from "./Role.jsx";
 import Gender from "./Gender.jsx";
+import Confirm from "./Confirm.jsx";
 import RecordPage from "./RecordPage.jsx";
 
 function Form() {
@@ -11,6 +12,28 @@ function Form() {
     gender: "",
     role: "",
   });
+  const [script, setScript] = useState("");
+
+  async function handleOnSubmit(e) {
+    e.preventDefault();
+    try {
+      const request = await fetch("http://localhost:8080/api/updateFeatures", {
+        method: "POST",
+        body: JSON.stringify(form),
+      });
+
+      const json = await request.json();
+
+      if (request.status === 200) {
+        console.log("Success");
+        goToRecordPage(json.script)
+      } else {
+        console.log("Failed");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   /**
    *
@@ -25,12 +48,19 @@ function Form() {
       case 3:
         return <Role updateForm={updateForm} />;
       case 4:
-        return <RecordPage />;
+        return <Confirm {...form} />;
+      case 5:
+        return <RecordPage script={script}/>
 
       default:
-        return <Genre updateForm={updateForm} />;
+        return <Confirm {...form} />;
     }
   };
+
+  function goToRecordPage(script) {
+    setScript(script);
+    handleFormNavigate(1);
+  }
 
   /**
    *
@@ -38,9 +68,9 @@ function Form() {
    * @returns
    */
   function handleFormNavigate(num) {
-    // if (step + num > Object.keys(form).length || step + num <= 0) {
-    //   return;
-    // }
+    if (step + num > 5 || step + num <= 0) {
+      return;
+    }
     setStep((step) => step + num);
   }
 
@@ -67,6 +97,7 @@ function Form() {
     }
     return true;
   }
+
   console.log(form);
 
   return (
@@ -80,14 +111,21 @@ function Form() {
       >
         Prev
       </button>
-      <button
-        type="button"
-        onClick={() => {
-          handleFormNavigate(1);
-        }}
-      >
-        Next
-      </button>
+
+      {step === 4 ? (
+        <button type="button" onClick={handleOnSubmit}>
+          Submit
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={() => {
+            handleFormNavigate(1);
+          }}
+        >
+          Next
+        </button>
+      )}
     </form>
   );
 }

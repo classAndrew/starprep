@@ -51,14 +51,14 @@ function RecordButton() {
     )
 }
 
-function RecordPage() {
+function RecordPage(props) {
     const readout_script = "This is a test script that the user will read out. Something something."
     
     return (<div>
         <h1>Read Aloud and Record</h1>
         <div>
             <p>
-                This is the script for you to read aloud. Please read it clearly and press the button to start and stop recording.
+                {props.script}
             </p>
         </div>
 
