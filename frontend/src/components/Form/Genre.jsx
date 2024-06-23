@@ -1,6 +1,6 @@
 import "../../styles/Form.css";
 import "../../styles/Genre.css";
-function Genre({ updateForm }) {
+function Genre({ updateForm, selectedGenre }) {
   const genres = ["Horror", "Mystery", "Fantasy", "Adventure", "Crime"];
   return (
     <div>
@@ -13,7 +13,9 @@ function Genre({ updateForm }) {
               name="genre"
               onClick={(e) => updateForm(e)}
               value={element}
-              className={element.replace(" ", "")}
+              className={`${element.replace(" ", "")} ${
+                selectedGenre !== element && "not-selected"
+              }`}
             >
               {element}
             </button>

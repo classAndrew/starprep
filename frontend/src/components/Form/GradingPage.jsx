@@ -117,12 +117,12 @@ const styles = {
   },
   textSection: {
     flex: 1,
-    width:"50%",
+    
     paddingRight: "20px",
   },
   progressSection: {
     flex: 1,
-    width:"50%",
+    
     paddingLeft: "20px",
   },
   progressBar: {

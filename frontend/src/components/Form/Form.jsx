@@ -47,7 +47,7 @@ function Form() {
     switch (step) {
       case 1:
         // return <GradingPage />
-        return <Genre updateForm={updateForm} genre = {form.genre}/>;
+        return <Genre updateForm={updateForm} selectedGenre= {form.genre}/>;
       case 2:
         return <Personality updateForm={updateForm} />;
       case 3:
