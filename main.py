@@ -105,7 +105,7 @@ def compare_user_with_hume(user_emotions, hume_emotions):
     for k in key_union:
         user_score = user_emotions_to_score.get(k, 0)
         home_score = hume_emotions_to_score.get(k, 0)
-        score_diff[k] = abs(user_score - home_score)
+        score_diff[k] = (user_score - home_score)
     
     return score_diff
 
@@ -114,6 +114,7 @@ def hello_world():
     return 'Hello, World!'
 
 if __name__ == '__main__':
-    file_name = "../data/angry/anger_505-532_0527.wav"
-    get_emotion_from_audio(file_name)
-    # app.run(port=8080)_
+    pass
+    # file_name = "../data/angry/anger_505-532_0527.wav"
+    # get_emotion_from_audio(file_name)
+    # app.run(port=8080)

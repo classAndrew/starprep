@@ -5,7 +5,6 @@ import Gender from "./Gender.jsx";
 import Confirm from "./Confirm.jsx";
 import RecordPage from "./RecordPage.jsx";
 import GradingPage from "./GradingPage.jsx";
-import Confirm from "./Confirm.jsx";
 import Script from "../Script.jsx";
 
 function Form() {
@@ -45,8 +44,8 @@ function Form() {
   const stepForm = () => {
     switch (step) {
       case 1:
-        return <GradingPage />
-        // return <Genre updateForm={updateForm} />;
+        // return <GradingPage />
+        return <Genre updateForm={updateForm} />;
       case 2:
         return <Gender updateForm={updateForm} />;
       case 3:
@@ -54,10 +53,10 @@ function Form() {
       case 4:
         return <Confirm {...form} />;
       case 5:
-        return <RecordPage script={script}/>
+        return <Script script={script} />;
 
       default:
-        return <Script />;
+        return <Script script={script} />;
     }
   };
 
