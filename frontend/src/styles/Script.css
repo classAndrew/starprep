@@ -1,0 +1,41 @@
+.script-text {
+  color: white;
+}
+
+.script-record {
+  color: white;
+
+  background-color: #007bff;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 0;
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(0.9);
+  }
+
+  &:disabled {
+    filter: brightness(0.4);
+    cursor: default;
+  }
+}
+
+.script-header {
+  color: white;
+}
+
+.script-stop {
+  background-color: #ff1313;
+  color: white;
+  padding: 1rem;
+  border-radius: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &:disabled {
+    filter: brightness(0.4);
+    cursor: default;
+  }
+}

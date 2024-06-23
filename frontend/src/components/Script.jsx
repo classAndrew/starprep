@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
+import "../styles/Script.css";
 function Script(props) {
   const [permission, setPermission] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
@@ -62,7 +62,7 @@ function Script(props) {
   return (
     <div>
       <div>
-        <p>
+        <p className="script-text">
           {props.script}
         </p>
       </div>
