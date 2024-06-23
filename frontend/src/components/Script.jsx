@@ -40,13 +40,11 @@ function Script(props) {
 
   function stopRecording() {
     mediaRecorder.current.stop();
-    mediaRecorder.current.onstop = () => {
-      //creates a blob file from the audiochunks data
+    mediaRecorder.current.onstop = () => { 
       const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
       //creates a playable URL from the blob file.
       const audioUrl = URL.createObjectURL(audioBlob);
       setAudio(audioUrl);
-      setAudioChunks([]);
     };
 
     const tracks = stream.getTracks();
@@ -55,8 +53,25 @@ function Script(props) {
     });
 
     setIsRecording(false);
+  }
 
-    
+  function submitRecording() {
+    //creates a blob file from the audiochunks data
+    const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+
+    let formData = new FormData();
+    formData.append('file', audioBlob, 'audio.wav');
+
+    fetch('http://localhost:8080/api/uploadAudio', {
+        mode: "no-cors",
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+
+    setAudioChunks([]);
   }
 
   return (
@@ -82,7 +97,7 @@ function Script(props) {
             <audio src={audio} controls></audio>
           </div>
 
-          <button>Submit</button>
+          <button onClick={submitRecording}>Submit</button>
         </>
       ) : null}
     </div>

@@ -5,6 +5,7 @@ from hume.models.config import LanguageConfig, ProsodyConfig
 import asyncio
 import openai
 import os
+import ffmpeg
 
 load_dotenv()
 hume_key = os.environ["hume_key"]
@@ -53,12 +54,6 @@ async def hume_get_story_emotions(samples):
     
     return hume_results
 
-def get_emotions_from_story(script):
-    samples = script.split('\n')
-    hume_emotions = asyncio.get_event_loop().run_until_complete(hume_get_story_emotions(samples))
-    print("hume len: ", len(hume_emotions))
-    return hume_emotions
-
 def get_emotion_from_audio(file_name):
     config = ProsodyConfig()
     job = hume_batch_client.submit_job(None, [config], files=[file_name])
@@ -75,46 +70,40 @@ def get_emotion_from_audio(file_name):
 
     return results
 
-def compare_user_with_hume(user_emotions, hume_emotions):
-    user_emotions_to_score = {}
-    hume_emotions_to_score = {}
-
-    for annotated_text, emotions in user_emotions:
-        for emotion_type, emotion_score in emotions:
-            if not emotion_type in user_emotions_to_score:
-                user_emotions_to_score[emotion_type] = []
-
-            user_emotions_to_score[emotion_type].append(emotion_score)
+@app.route('/api/uploadAudio', methods=['POST'])
+def upload_file():
+    response = None
+    if 'file' not in request.files:
+        response = jsonify({"error": "No file part"})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     
-    for sentence_emotion in hume_emotions:
-        for emotion_type, emotion_score in sentence_emotion:
-            if not emotion_type in hume_emotions_to_score:
-                hume_emotions_to_score[emotion_type] = []
-
-            hume_emotions_to_score[emotion_type].append(emotion_score)
+    file = request.files['file']
     
-    for k in user_emotions_to_score:
-        user_emotions_to_score[k] = sum(user_emotions_to_score)/len(user_emotions_to_score)
+    if file.filename == '':
+        response = jsonify({"error": "No selected file"})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+
+    if file:
+        file_path = "uploaded_audio/saved_file.wav"
+        file.save(file_path)
         
-    for k in hume_emotions_to_score:
-        hume_emotions_to_score[k] = sum(hume_emotions_to_score)/len(hume_emotions_to_score)
+    ffmpeg.input("uploaded_audio/saved_file.wav").output("uploaded_audio/saved_file.mp3").overwrite_output().run()
 
-    key_union = user_emotions_to_score.keys() | hume_emotions_to_score.keys()
-    score_diff = {}
-
-    for k in key_union:
-        user_score = user_emotions_to_score.get(k, 0)
-        home_score = hume_emotions_to_score.get(k, 0)
-        score_diff[k] = (user_score - home_score)
-    
-    return score_diff
+    emotions = get_emotion_from_audio("uploaded_audio/saved_file.mp3")
+    print(emotions)
+    response = jsonify(emotions)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
 
 if __name__ == '__main__':
-    pass
+    # pass
     # file_name = "../data/angry/anger_505-532_0527.wav"
-    # get_emotion_from_audio(file_name)
-    # app.run(port=8080)
+    # file_name = "../data/test/test.mp3"
+    # print(get_emotion_from_audio(file_name))
+    app.run(port=8080) 
