@@ -15,6 +15,7 @@ function Form() {
     role: "",
   });
   const [script, setScript] = useState("");
+  const [gradingResults, setGrading] = useState({});
 
   async function handleOnSubmit(e) {
     e.preventDefault();
@@ -53,7 +54,9 @@ function Form() {
       case 4:
         return <Confirm {...form} />;
       case 5:
-        return <Script script={script} />;
+        return <Script script={script} setGrading={setGrading} handleFormNavigate={handleFormNavigate} />;
+      case 6:
+          return <GradingPage gradingResults={gradingResults} />;
 
       default:
         return <Script script={script} />;
@@ -71,7 +74,7 @@ function Form() {
    * @returns
    */
   function handleFormNavigate(num) {
-    if (step + num > 5 || step + num <= 0) {
+    if (step + num > 6 || step + num <= 0) {
       return;
     }
     setStep((step) => step + num);

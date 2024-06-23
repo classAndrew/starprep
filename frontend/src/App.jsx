@@ -6,8 +6,8 @@ import Script from "./components/Script.jsx";
 function App() {
   return (
     <>
-      {/* <Form /> */}
-      <Script />
+      <Form />
+      {/* <Script /> */}
       {/* <GradingPage /> */}
     </>
   );

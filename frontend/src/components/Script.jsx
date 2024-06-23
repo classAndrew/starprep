@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "../styles/Script.css";
+
 function Script(props) {
   const [permission, setPermission] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
@@ -24,6 +25,7 @@ function Script(props) {
       video: false,
     });
     setStream(audio);
+    setAudioChunks([]);
 
     // const media = new MediaRecorder(stream, { type: "audio/webm" });
     const media = new MediaRecorder(audio, { type: "audio/webm" });
@@ -63,15 +65,15 @@ function Script(props) {
     formData.append('file', audioBlob, 'audio.wav');
 
     fetch('http://localhost:8080/api/uploadAudio', {
-        mode: "no-cors",
+        // mode: "no-cors",
         method: 'POST',
         body: formData
     })
     .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
-
-    setAudioChunks([]);
+    .then(data => {
+      props.setGrading(data);
+      props.handleFormNavigate(1);
+    });
   }
 
   return (
@@ -97,7 +99,7 @@ function Script(props) {
             <audio src={audio} controls></audio>
           </div>
 
-          <button onClick={submitRecording}>Submit</button>
+          <button type="button" onClick={submitRecording}>Submit</button>
         </>
       ) : null}
     </div>

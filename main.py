@@ -71,19 +71,8 @@ def get_emotion_from_audio(file_name):
     return results
 
 @app.route('/api/uploadAudio', methods=['POST'])
-def upload_file():
-    response = None
-    if 'file' not in request.files:
-        response = jsonify({"error": "No file part"})
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
-    
+def uploadAudio():
     file = request.files['file']
-    
-    if file.filename == '':
-        response = jsonify({"error": "No selected file"})
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
 
     if file:
         file_path = "uploaded_audio/saved_file.wav"
@@ -92,8 +81,11 @@ def upload_file():
     ffmpeg.input("uploaded_audio/saved_file.wav").output("uploaded_audio/saved_file.mp3").overwrite_output().run()
 
     emotions = get_emotion_from_audio("uploaded_audio/saved_file.mp3")
-    print(emotions)
-    response = jsonify(emotions)
+    result_dict = {}
+    for annotated_text, emotions in emotions:
+        result_dict[annotated_text] = emotions
+        
+    response = jsonify(result_dict)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 

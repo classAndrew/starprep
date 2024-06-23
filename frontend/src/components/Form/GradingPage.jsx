@@ -1,34 +1,46 @@
 import React, { useState } from "react";
 import Sentence from "./Sentence.jsx";
 
-const GradingPage = () => {
+const GradingPage = (props) => {
   const [textProgress, setTextProgress] = useState(1);
   const texts = [
-    {
-      text: "This is a sample text section.",
-      score: {
-        Tone: 80,
-        Anger: 90,
-        Happy: 10,
-      },
-    },
-    {
-      text: "You can add any text here.",
-      score: {
-        Tone: 50,
-        Anger: 50,
-        Happy: 50,
-      },
-    },
-    {
-      text: "It is displayed on the left-hand side of the container",
-      score: {
-        Tone: 10,
-        Anger: 10,
-        Happy: 10,
-      },
-    },
+    // {
+    //   text: "This is a sample text section.",
+    //   score: {
+    //     Tone: 80,
+    //     Anger: 90,
+    //     Happy: 10,
+    //   },
+    // },
+    // {
+    //   text: "You can add any text here.",
+    //   score: {
+    //     Tone: 50,
+    //     Anger: 50,
+    //     Happy: 50,
+    //   },
+    // },
+    // {
+    //   text: "It is displayed on the left-hand side of the container",
+    //   score: {
+    //     Tone: 10,
+    //     Anger: 10,
+    //     Happy: 10,
+    //   },
+    // }
   ];
+
+  Object.keys(props.gradingResults).forEach((e) => {
+    const score = {}; 
+    props.gradingResults[e].forEach((emotion) => {
+        score[emotion.name] = emotion.score;
+    })
+    console.log(score);
+    texts.push({
+        text: e,
+        score: score*100
+    });
+  });
 
   function updateProgressScore(index) {
     setTextProgress(index);
