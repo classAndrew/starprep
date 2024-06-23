@@ -1,11 +1,11 @@
 function Confirm({ genre, gender, role }) {
   return (
     <div>
-      <h1>Confirm your selection:</h1>
-      <ul>
-        <li>Genre: {genre}</li>
-        <li>Gender: {gender}</li>
-        <li>Role: {role}</li>
+      <h1 className="form-header"> Confirm your selection:</h1>
+      <ul className="form-btn-list">
+        <li className="list-text">Genre: {genre}</li>
+        <li className="list-text">Gender: {gender}</li>
+        <li className="list-text">Role: {role}</li>
       </ul>
     </div>
   );

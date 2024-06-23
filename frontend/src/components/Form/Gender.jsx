@@ -3,8 +3,8 @@ function Gender({ updateForm }) {
 
   return (
     <div>
-      <h1>What gender?</h1>
-      <ul>
+      <h1 className="form-header">What gender?</h1>
+      <ul className="form-btn-list">
         {gender.map((element, index) => (
           <li key={index}>
             <button
@@ -12,6 +12,7 @@ function Gender({ updateForm }) {
               name="gender"
               onClick={(e) => updateForm(e)}
               value={element}
+              className="form-btn"
             >
               {element}
             </button>

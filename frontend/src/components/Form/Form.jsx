@@ -28,7 +28,7 @@ function Form() {
 
       if (request.status === 200) {
         console.log("Success");
-        goToRecordPage(json.script)
+        goToRecordPage(json.script);
       } else {
         console.log("Failed");
       }

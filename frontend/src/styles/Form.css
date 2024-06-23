@@ -1,0 +1,25 @@
+.form-header{
+    color:white;
+    font-size: 2rem;
+}
+
+.form-btn-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.form-btn{
+    padding:1rem;
+    border-radius: 1rem;
+    border:0;
+    width:75%;
+    
+}
+
+.form-btn:hover{
+    cursor: pointer;
+}
+
+.list-text{
+    color: white;
+}
