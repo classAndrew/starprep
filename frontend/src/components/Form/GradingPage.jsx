@@ -57,7 +57,7 @@ const GradingPage = (props) => {
   return (
     <div style={styles.container}>
       <div style={styles.textSection}>
-        <h1>Sample Text</h1>
+        <h1>Transcribed Audio</h1>
         {texts.map((item, index) => {
           return (
             <Sentence
