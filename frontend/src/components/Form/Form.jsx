@@ -4,6 +4,7 @@ import Role from "./Role.jsx";
 import Gender from "./Gender.jsx";
 import RecordPage from "./RecordPage.jsx";
 import Confirm from "./Confirm.jsx";
+import Script from "../Script.jsx";
 
 function Form() {
   const [step, setStep] = useState(1);
@@ -46,10 +47,10 @@ function Form() {
       case 3:
         return <Role updateForm={updateForm} />;
       case 4:
-        return <RecordPage />;
+        return <Confirm {...form} />;
 
       default:
-        return <Confirm {...form} />;
+        return <Script />;
     }
   };
 
