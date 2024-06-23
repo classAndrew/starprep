@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Mystery+Quest&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ribeye&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap');
+
+#root {
+  background-image: url("../assets/genre_bg.png") !important;
+}
+
+.Horror {
+    font-family: "Rubik Glitch", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 6ch;
+    background-color: black;
+    color: white;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+    text-align: center;
+    width: 50vh;
+    height: 10vh;
+    margin-top: 1vh;
+}
+
+.Mystery {
+    font-family: "Mystery Quest", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 6ch;
+    background-color: #4D1497;
+    color: white;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+    text-align: center;
+    width: 50vh;
+    height: 10vh;
+    margin-top: 1vh;
+}
+
+.Fantasy {
+    font-family: "Ribeye", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 6ch;
+    background-color: #14098C;
+    color: white;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+    text-align: center;
+    width: 50vh;
+    height: 10vh;
+    margin-top: 1vh;
+}
+
+.Adventure {
+    font-family: "Rubik", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 6ch;
+    background-color: #01A661;
+    color: white;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+    text-align: center;
+    width: 50vh;
+    height: 10vh;
+    margin-top: 1vh;
+}
+
+.Crime {
+    font-family: "Rubik Wet Paint", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 6ch;
+    background-color: #A90F0F;
+    color: white;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+    text-align: center;
+    width: 50vh;
+    height: 10vh;
+    margin-top: 1vh;
+}

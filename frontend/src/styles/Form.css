@@ -1,19 +1,24 @@
 .form-header{
     color:white;
-    font-size: 2rem;
+    font-size: 8ch;
+    text-align: center;
+    font-family: "Arial", system-ui;
 }
 
 .form-btn-list{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /* justify-content: space-around; */
+    justify-content: center;
+    align-items: center;
 }
 .form-btn{
     padding:1rem;
     border-radius: 1rem;
     border:0;
     width:75%;
-    
+    align-items: center;
+    justify-content: center;
 }
 
 .form-btn:hover{
