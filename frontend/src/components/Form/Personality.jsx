@@ -1,7 +1,13 @@
-import "../../styles/Personality.css"
+import "../../styles/Personality.css";
 
-function Personality({ updateForm }) {
-  const personalities = ["Confident 💪", "Shy 🙈", "Optimistic 🌞", "Pessimistic 🌧️", "Creative 🎨"];
+function Personality({ updateForm, selectedPersonality }) {
+  const personalities = [
+    "Confident 💪",
+    "Shy 🙈",
+    "Optimistic 🌞",
+    "Pessimistic 🌧️",
+    "Creative 🎨",
+  ];
 
   return (
     <div>
@@ -14,7 +20,9 @@ function Personality({ updateForm }) {
               name="personality"
               onClick={(e) => updateForm(e)}
               value={element}
-              className={element.split(" ")[0]}
+              className={`${element.split(" ")[0]} 
+              ${selectedPersonality !== element && "not-selected"}
+              `}
             >
               {element}
             </button>

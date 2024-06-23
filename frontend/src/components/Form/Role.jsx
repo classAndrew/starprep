@@ -1,4 +1,5 @@
-function Role({ updateForm }) {
+import "../../styles/Role.css";
+function Role({ updateForm, selectedRole }) {
   const role = ["Protagonist", "Antagonist", "Sidekick"];
   return (
     <div>
@@ -11,7 +12,9 @@ function Role({ updateForm }) {
               name="role"
               onClick={(e) => updateForm(e)}
               value={element}
-              className="form-btn"
+              className={`${element.replace(" ", "")} ${
+                selectedRole !== element && "not-selected"
+              }`}
             >
               {element}
             </button>

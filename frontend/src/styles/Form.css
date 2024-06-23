@@ -52,3 +52,13 @@ form {
 .selected{
   filter: brightness(1);
 }
+
+.form-arrows{
+  padding:1rem;
+  border-radius: 1rem;
+  border:0;
+
+  &:hover{
+    cursor: pointer;
+  }
+}

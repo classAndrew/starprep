@@ -1,0 +1,41 @@
+.Protagonist{
+    font-weight: 400;
+    font-style: normal;
+    font-size: 6ch;
+    background-color: #007bff;
+    color: white;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+    text-align: center;
+    width: 50vh;
+    height: 10vh;
+    margin-top: 1vh;
+}
+
+.Antagonist{
+    font-weight: 400;
+    font-style: normal;
+    font-size: 6ch;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+    text-align: center;
+    width: 50vh;
+    height: 10vh;
+    margin-top: 1vh;
+}
+
+.Sidekick{
+    font-weight: 400;
+    font-style: normal;
+    font-size: 6ch;
+    background-color: #ffc107;
+    color: white;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+    text-align: center;
+    width: 50vh;
+    height: 10vh;
+    margin-top: 1vh;
+}

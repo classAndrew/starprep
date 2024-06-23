@@ -1,7 +1,13 @@
-import "../../styles/Mission.css"
+import "../../styles/Mission.css";
 
-function Mission({ updateForm }) {
-  const missions = ["Discover something new", "Escape something/someone", "Achieve redemption", "Right their wrongs", "Rescue someone"];
+function Mission({ updateForm, selectedMission }) {
+  const missions = [
+    "Discover something new",
+    "Escape something/someone",
+    "Achieve redemption",
+    "Right their wrongs",
+    "Rescue someone",
+  ];
 
   return (
     <div>
@@ -14,7 +20,9 @@ function Mission({ updateForm }) {
               name="mission"
               onClick={(e) => updateForm(e)}
               value={element}
-              className="mission"
+              className={`mission ${
+                selectedMission !== element && "not-selected"
+              }`}
             >
               {element}
             </button>

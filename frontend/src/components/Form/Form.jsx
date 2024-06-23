@@ -15,7 +15,7 @@ function Form() {
     genre: "",
     personality: "",
     role: "",
-    mission: ""
+    mission: "",
   });
   const [script, setScript] = useState("");
   const [gradingResults, setGrading] = useState({});
@@ -49,19 +49,32 @@ function Form() {
     switch (step) {
       case 1:
         // return <GradingPage />
-        return <Genre updateForm={updateForm} selectedGenre= {form.genre}/>;
+        return <Genre updateForm={updateForm} selectedGenre={form.genre} />;
       case 2:
-        return <Personality updateForm={updateForm}/>;
+        return (
+          <Personality
+            updateForm={updateForm}
+            selectedPersonality={form.personality}
+          />
+        );
       case 3:
-        return <Role updateForm={updateForm} />;
+        return <Role updateForm={updateForm} selectedRole={form.role} />;
       case 4:
-        return <Mission updateForm={updateForm} />;
+        return (
+          <Mission updateForm={updateForm} selectedMission={form.mission} />
+        );
       case 5:
         return <Confirm {...form} />;
       case 6:
-        return <Script script={script} setGrading={setGrading} handleFormNavigate={handleFormNavigate} />;
+        return (
+          <Script
+            script={script}
+            setGrading={setGrading}
+            handleFormNavigate={handleFormNavigate}
+          />
+        );
       case 7:
-          return <GradingPage gradingResults={gradingResults} />;
+        return <GradingPage gradingResults={gradingResults} />;
 
       default:
         return <Script script={script} />;
@@ -119,12 +132,14 @@ function Form() {
         onClick={() => {
           handleFormNavigate(-1);
         }}
+        className="form-arrows"
       >
         Prev
       </button>
 
       {step === 4 ? (
-        <button type="button" onClick={handleOnSubmit}>
+        <button type="button" onClick={handleOnSubmit}
+        className="form-arrows">
           Submit
         </button>
       ) : (
@@ -133,6 +148,7 @@ function Form() {
           onClick={() => {
             handleFormNavigate(1);
           }}
+          className="form-arrows"
         >
           Next
         </button>
