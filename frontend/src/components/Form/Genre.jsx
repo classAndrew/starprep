@@ -1,9 +1,10 @@
 import "../../styles/Form.css";
+import "../../styles/Genre.css";
 function Genre({ updateForm }) {
-  const genres = ["Fantasy", "Science Ficton", "Horror"];
+  const genres = ["Horror", "Mystery", "Fantasy", "Adventure", "Crime"];
   return (
     <div>
-      <h1 className="form-header">What type of genre?</h1>
+      <h1 className="form-header">Choose a Genre</h1>
       <ul className="form-btn-list">
         {genres.map((element, index) => (
           <li key={index}>
@@ -12,7 +13,7 @@ function Genre({ updateForm }) {
               name="genre"
               onClick={(e) => updateForm(e)}
               value={element}
-              className="form-btn"
+              className={element.replace(" ", "")}
             >
               {element}
             </button>
