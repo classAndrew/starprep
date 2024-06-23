@@ -43,3 +43,12 @@ form {
 .form-arrows {
   padding: 1rem;
 }
+
+
+.not-selected{
+  filter:brightness(0.5);
+}
+
+.selected{
+  filter: brightness(1);
+}

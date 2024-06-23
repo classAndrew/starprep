@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "../styles/Script.css";
-
+import mic from "../assets/microphone-solid.svg";
 function Script(props) {
   const [permission, setPermission] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
@@ -42,7 +42,7 @@ function Script(props) {
 
   function stopRecording() {
     mediaRecorder.current.stop();
-    mediaRecorder.current.onstop = () => { 
+    mediaRecorder.current.onstop = () => {
       const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
       //creates a playable URL from the blob file.
       const audioUrl = URL.createObjectURL(audioBlob);
@@ -62,46 +62,60 @@ function Script(props) {
     const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
 
     let formData = new FormData();
-    formData.append('file', audioBlob, 'audio.wav');
+    formData.append("file", audioBlob, "audio.wav");
 
-    fetch('http://localhost:8080/api/uploadAudio', {
-        // mode: "no-cors",
-        method: 'POST',
-        body: formData
+    fetch("http://localhost:8080/api/uploadAudio", {
+      // mode: "no-cors",
+      method: "POST",
+      body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
-      props.setGrading(data);
-      props.handleFormNavigate(1);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        props.setGrading(data);
+        props.handleFormNavigate(1);
+      });
   }
 
   return (
     <div>
-      <div>
-        <p className="script-text">
-          {props.script}
-        </p>
+      <div className="mic-container">
+        <img src={mic} alt="Microphone" className="mic"/>
       </div>
-
-      <div>
-        <button onClick={startRecording} disabled={isRecording} type="button">
+      
+      <div className="script-text-container">
+        <h3>
+          <b>Prompt</b>
+        </h3>
+        <p className="script-text">{props.script}</p>
+        <div>
+        <button onClick={startRecording} disabled={isRecording} type="button"
+        className="script-record"
+        >
           Start Recording Voice
         </button>
-        <button onClick={stopRecording} disabled={!isRecording} type="button">
+        <button onClick={stopRecording} disabled={!isRecording} type="button"
+        className="script-stop"
+        >
           Stop Recording Voice
         </button>
       </div>
-
       {audio ? (
         <>
           <div className="audio-container">
             <audio src={audio} controls></audio>
           </div>
 
-          <button type="button" onClick={submitRecording}>Submit</button>
+          <button type="button" onClick={submitRecording}
+            className="script-submit"
+          >
+            Submit
+          </button>
         </>
       ) : null}
+      </div>
+
+ 
+   
     </div>
   );
 }

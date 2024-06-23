@@ -109,11 +109,13 @@ const GradingPage = (props) => {
 
 const styles = {
   container: {
-    color: "white",
+    color: "black",
     display: "flex",
     justifyContent: "space-between",
     padding: "20px",
     fontFamily: "Arial, sans-serif",
+    backgroundColor: "white",
+    borderRadius: "1rem"
   },
   textSection: {
     flex: 1,

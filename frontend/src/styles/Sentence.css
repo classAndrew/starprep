@@ -1,3 +1,7 @@
 .sentences {
   margin: 1rem 0px 1rem 0px;
+
+  &:hover{
+    cursor: pointer;
+  }
 }

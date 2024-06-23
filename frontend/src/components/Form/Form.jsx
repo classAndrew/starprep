@@ -51,7 +51,7 @@ function Form() {
         // return <GradingPage />
         return <Genre updateForm={updateForm} selectedGenre= {form.genre}/>;
       case 2:
-        return <Personality updateForm={updateForm} />;
+        return <Personality updateForm={updateForm}/>;
       case 3:
         return <Role updateForm={updateForm} />;
       case 4:
