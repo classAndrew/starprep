@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Sentence from "./Sentence.jsx";
-
+import "../../GradingPage.css";
 const GradingPage = (props) => {
   const [textProgress, setTextProgress] = useState(1);
   const texts = [
@@ -31,14 +31,14 @@ const GradingPage = (props) => {
   ];
 
   Object.keys(props.gradingResults).forEach((e) => {
-    const score = {}; 
+    const score = {};
     props.gradingResults[e].forEach((emotion) => {
-        score[emotion.name] = emotion.score*100;
-    })
+      score[emotion.name] = emotion.score * 100;
+    });
     console.log(score);
     texts.push({
-        text: e,
-        score: score
+      text: e,
+      score: score,
     });
   });
 
@@ -72,7 +72,10 @@ const GradingPage = (props) => {
 
       <div style={styles.progressSection}>
         <h2>Progress Bars For: </h2>
-        <p>{texts[textProgress].text}</p>
+        <p
+        className="graded-text"
+        
+        >{texts[textProgress].text}</p>
         {Object.entries(showProgressForText()).map(([key, value]) => {
           return (
             <div key={key} style={styles.progressBar}>
@@ -106,6 +109,7 @@ const GradingPage = (props) => {
 
 const styles = {
   container: {
+    color: "white",
     display: "flex",
     justifyContent: "space-between",
     padding: "20px",
@@ -113,10 +117,12 @@ const styles = {
   },
   textSection: {
     flex: 1,
+    width:"50%",
     paddingRight: "20px",
   },
   progressSection: {
     flex: 1,
+    width:"50%",
     paddingLeft: "20px",
   },
   progressBar: {

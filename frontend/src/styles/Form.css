@@ -1,25 +1,35 @@
-.form-header{
-    color:white;
-    font-size: 2rem;
+.form-header {
+  color: white;
+  font-size: 2rem;
 }
 
-.form-btn-list{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.form-btn-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  > * {
+    margin: 1rem 0px 1rem 0px;
+  }
 }
-.form-btn{
-    padding:1rem;
-    border-radius: 1rem;
-    border:0;
-    width:75%;
-    
-}
-
-.form-btn:hover{
-    cursor: pointer;
+.form-btn {
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 0;
+  width: 75%;
 }
 
-.list-text{
-    color: white;
+.form-btn:hover {
+  cursor: pointer;
+}
+
+.list-text {
+  color: white;
+}
+
+form {
+  width: 75%;
+}
+
+.form-arrows {
+  padding: 1rem;
 }
