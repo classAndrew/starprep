@@ -5,6 +5,8 @@ import Gender from "./Gender.jsx";
 import Confirm from "./Confirm.jsx";
 import RecordPage from "./RecordPage.jsx";
 import GradingPage from "./GradingPage.jsx";
+import Confirm from "./Confirm.jsx";
+import Script from "../Script.jsx";
 
 function Form() {
   const [step, setStep] = useState(1);
@@ -55,7 +57,7 @@ function Form() {
         return <RecordPage script={script}/>
 
       default:
-        return <Confirm {...form} />;
+        return <Script />;
     }
   };
 

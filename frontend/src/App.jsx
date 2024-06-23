@@ -1,10 +1,12 @@
 import "./App.css";
 import Form from "./components/Form/Form.jsx";
+import Script from "./components/Script.jsx";
 
 function App() {
   return (
     <>
-      <Form />
+      {/* <Form /> */}
+      <Script />
     </>
   );
 }
