@@ -81,10 +81,10 @@ function Script() {
       </div>
 
       <div>
-        <button onClick={startRecording} disabled={isRecording}>
+        <button onClick={startRecording} disabled={isRecording} type="button">
           Start Recording Voice
         </button>
-        <button onClick={stopRecording} disabled={!isRecording}>
+        <button onClick={stopRecording} disabled={!isRecording} type="button">
           Stop Recording Voice
         </button>
       </div>
