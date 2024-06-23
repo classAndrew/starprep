@@ -33,12 +33,12 @@ const GradingPage = (props) => {
   Object.keys(props.gradingResults).forEach((e) => {
     const score = {}; 
     props.gradingResults[e].forEach((emotion) => {
-        score[emotion.name] = emotion.score;
+        score[emotion.name] = emotion.score*100;
     })
     console.log(score);
     texts.push({
         text: e,
-        score: score*100
+        score: score
     });
   });
 
