@@ -1,4 +1,4 @@
-function Confirm({ genre, personality, role }) {
+function Confirm({ genre, personality, role, mission }) {
   return (
     <div>
       <h1 className="form-header"> Confirm your selection:</h1>
@@ -6,6 +6,7 @@ function Confirm({ genre, personality, role }) {
         <li className="list-text">Genre: {genre}</li>
         <li className="list-text">Personality: {personality}</li>
         <li className="list-text">Role: {role}</li>
+        <li className="list-text">Mission: {mission}</li>
       </ul>
     </div>
   );

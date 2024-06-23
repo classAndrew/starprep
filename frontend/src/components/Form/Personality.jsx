@@ -1,3 +1,5 @@
+import "../../styles/Personality.css"
+
 function Personality({ updateForm }) {
   const personalities = ["Confident 💪", "Shy 🙈", "Optimistic 🌞", "Pessimistic 🌧️", "Creative 🎨"];
 

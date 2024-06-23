@@ -31,6 +31,7 @@ Center the story given the following characteristics:
 Genre: {params['genre']}   
 Personality: {params['personality']}   
 Role: {params['role']}   
+Mission: {params['mission']}
 """}],
         max_tokens=700
     )

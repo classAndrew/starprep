@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+.mission {
+    font-family: "Rubik", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3ch;
+    background: linear-gradient(to right, #7158E2, #CD84F1);
+    color: white;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+    text-align: center;
+    width: 50vh;
+    height: 10vh;
+    margin-top: 1vh;
+}

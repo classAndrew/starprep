@@ -3,6 +3,7 @@ import Genre from "./Genre.jsx";
 import Role from "./Role.jsx";
 import Personality from "./Personality.jsx";
 import Confirm from "./Confirm.jsx";
+import Mission from "./Mission.jsx";
 import RecordPage from "./RecordPage.jsx";
 import GradingPage from "./GradingPage.jsx";
 import Script from "../Script.jsx";
@@ -14,6 +15,7 @@ function Form() {
     genre: "",
     personality: "",
     role: "",
+    mission: ""
   });
   const [script, setScript] = useState("");
   const [gradingResults, setGrading] = useState({});
@@ -53,10 +55,12 @@ function Form() {
       case 3:
         return <Role updateForm={updateForm} />;
       case 4:
-        return <Confirm {...form} />;
+        return <Mission updateForm={updateForm} />;
       case 5:
-        return <Script script={script} setGrading={setGrading} handleFormNavigate={handleFormNavigate} />;
+        return <Confirm {...form} />;
       case 6:
+        return <Script script={script} setGrading={setGrading} handleFormNavigate={handleFormNavigate} />;
+      case 7:
           return <GradingPage gradingResults={gradingResults} />;
 
       default:
@@ -75,7 +79,7 @@ function Form() {
    * @returns
    */
   function handleFormNavigate(num) {
-    if (step + num > 6 || step + num <= 0) {
+    if (step + num > 7 || step + num <= 0) {
       return;
     }
     setStep((step) => step + num);
