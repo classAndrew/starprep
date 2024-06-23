@@ -21,10 +21,18 @@
     justify-content: center;
 }
 
-.form-btn:hover{
-    cursor: pointer;
+.form-btn:hover {
+  cursor: pointer;
 }
 
-.list-text{
-    color: white;
+.list-text {
+  color: white;
+}
+
+form {
+  width: 75%;
+}
+
+.form-arrows {
+  padding: 1rem;
 }

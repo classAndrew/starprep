@@ -7,6 +7,7 @@ import RecordPage from "./RecordPage.jsx";
 import GradingPage from "./GradingPage.jsx";
 import Script from "../Script.jsx";
 
+import "../../styles/Form.css";
 function Form() {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({
@@ -46,7 +47,7 @@ function Form() {
     switch (step) {
       case 1:
         // return <GradingPage />
-        return <Genre updateForm={updateForm} />;
+        return <Genre updateForm={updateForm} genre = {form.genre}/>;
       case 2:
         return <Personality updateForm={updateForm} />;
       case 3:
