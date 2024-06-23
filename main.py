@@ -29,7 +29,7 @@ Please write a piece of dialogue for a single character that matches the given d
 Include only the text that will be read aloud.
 Center the story given the following characteristics:
 Genre: {params['genre']}   
-Gender: {params['gender']}   
+Personality: {params['personality']}   
 Role: {params['role']}   
 """}],
         max_tokens=700
@@ -84,7 +84,7 @@ def uploadAudio():
     result_dict = {}
     for annotated_text, emotions in emotions:
         result_dict[annotated_text] = emotions
-        
+
     response = jsonify(result_dict)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
