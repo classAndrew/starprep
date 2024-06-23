@@ -4,6 +4,7 @@ import Role from "./Role.jsx";
 import Gender from "./Gender.jsx";
 import Confirm from "./Confirm.jsx";
 import RecordPage from "./RecordPage.jsx";
+import GradingPage from "./GradingPage.jsx";
 
 function Form() {
   const [step, setStep] = useState(1);
@@ -42,7 +43,8 @@ function Form() {
   const stepForm = () => {
     switch (step) {
       case 1:
-        return <Genre updateForm={updateForm} />;
+        return <GradingPage />
+        // return <Genre updateForm={updateForm} />;
       case 2:
         return <Gender updateForm={updateForm} />;
       case 3:

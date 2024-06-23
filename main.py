@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 from hume import HumeBatchClient, HumeStreamClient
-from hume.models.config import LanguageConfig
+from hume.models.config import LanguageConfig, ProsodyConfig
 import asyncio
 import openai
 import os
@@ -59,12 +59,61 @@ def get_emotions_from_story(script):
     print("hume len: ", len(hume_emotions))
     return hume_emotions
 
-def get_emotion_from_audio():
-    pass
+def get_emotion_from_audio(file_name):
+    config = ProsodyConfig()
+    job = hume_batch_client.submit_job(None, [config], files=[file_name])
+
+    details = job.await_complete()
+    job.download_predictions("predictions.json")
+    predictions = job.get_predictions()
+    results = []
+
+    for prediction in predictions[0]["results"]["predictions"][0]["models"]["prosody"]["grouped_predictions"][0]["predictions"]:
+        text = prediction["text"]
+        top_5_emotions = sorted(prediction["emotions"], key=lambda x: x["score"], reverse=True)[:5]
+        results.append((text, top_5_emotions))
+
+    return results
+
+def compare_user_with_hume(user_emotions, hume_emotions):
+    user_emotions_to_score = {}
+    hume_emotions_to_score = {}
+
+    for annotated_text, emotions in user_emotions:
+        for emotion_type, emotion_score in emotions:
+            if not emotion_type in user_emotions_to_score:
+                user_emotions_to_score[emotion_type] = []
+
+            user_emotions_to_score[emotion_type].append(emotion_score)
+    
+    for sentence_emotion in hume_emotions:
+        for emotion_type, emotion_score in sentence_emotion:
+            if not emotion_type in hume_emotions_to_score:
+                hume_emotions_to_score[emotion_type] = []
+
+            hume_emotions_to_score[emotion_type].append(emotion_score)
+    
+    for k in user_emotions_to_score:
+        user_emotions_to_score[k] = sum(user_emotions_to_score)/len(user_emotions_to_score)
+        
+    for k in hume_emotions_to_score:
+        hume_emotions_to_score[k] = sum(hume_emotions_to_score)/len(hume_emotions_to_score)
+
+    key_union = user_emotions_to_score.keys() | hume_emotions_to_score.keys()
+    score_diff = {}
+
+    for k in key_union:
+        user_score = user_emotions_to_score.get(k, 0)
+        home_score = hume_emotions_to_score.get(k, 0)
+        score_diff[k] = abs(user_score - home_score)
+    
+    return score_diff
 
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
 
 if __name__ == '__main__':
-    app.run(port=8080)
+    file_name = "../data/angry/anger_505-532_0527.wav"
+    get_emotion_from_audio(file_name)
+    # app.run(port=8080)_
