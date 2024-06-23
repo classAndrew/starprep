@@ -137,7 +137,7 @@ function Form() {
         Prev
       </button>
 
-      {step === 4 ? (
+      {step === 5 ? (
         <button type="button" onClick={handleOnSubmit}
         className="form-arrows">
           Submit

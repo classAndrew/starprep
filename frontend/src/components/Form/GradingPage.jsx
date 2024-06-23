@@ -33,7 +33,7 @@ const GradingPage = (props) => {
   Object.keys(props.gradingResults).forEach((e) => {
     const score = {};
     props.gradingResults[e].forEach((emotion) => {
-      score[emotion.name] = emotion.score * 100;
+      score[emotion.name] = Math.round(emotion.score * 10000, 2)/100;
     });
     console.log(score);
     texts.push({

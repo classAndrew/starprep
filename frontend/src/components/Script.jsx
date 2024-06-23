@@ -65,7 +65,7 @@ function Script(props) {
     formData.append("file", audioBlob, "audio.wav");
 
     fetch("http://localhost:8080/api/uploadAudio", {
-      // mode: "no-cors",
+      mode: "no-cors",
       method: "POST",
       body: formData,
     })
