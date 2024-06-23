@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Genre from "./Genre.jsx";
 import Role from "./Role.jsx";
-import Gender from "./Gender.jsx";
+import Personality from "./Personality.jsx";
 import Confirm from "./Confirm.jsx";
 import RecordPage from "./RecordPage.jsx";
 import GradingPage from "./GradingPage.jsx";
@@ -11,7 +11,7 @@ function Form() {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({
     genre: "",
-    gender: "",
+    personality: "",
     role: "",
   });
   const [script, setScript] = useState("");
@@ -48,7 +48,7 @@ function Form() {
         // return <GradingPage />
         return <Genre updateForm={updateForm} />;
       case 2:
-        return <Gender updateForm={updateForm} />;
+        return <Personality updateForm={updateForm} />;
       case 3:
         return <Role updateForm={updateForm} />;
       case 4:
